@@ -13,6 +13,6 @@ my_fruit_list=my_fruit_list.set_index('Fruit')
 
 #Let's put a pick list here so they can pick the fruit they want to include
 fruit_select=st.multiselect("Pick some fruits:", list(my_fruit_list.index))
-st.write(fruit_select)
+#st.write(fruit_select)
 #dispay the table on page
-st.dataframe(my_fruit_list)
+st.dataframe(my_fruit_list(fruit_select))
