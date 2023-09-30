@@ -13,7 +13,10 @@ my_fruit_list=my_fruit_list.set_index('Fruit')
 
 #Let's put a pick list here so they can pick the fruit they want to include
 fruit_select=st.multiselect("Pick some fruits:", list(my_fruit_list.index))
-fruits_to_show=my_fruit_list.loc[fruit_select]
-#st.write(fruit_select)
-#dispay the table on page
-st.dataframe(fruits_to_show)
+if len(fruit_select)>0:
+  fruits_to_show=my_fruit_list.loc[fruit_select]
+  #st.write(fruit_select)
+  #dispay the table on page
+  st.dataframe(fruits_to_show)
+else:
+  st.dataframe(my_fruit_list)
