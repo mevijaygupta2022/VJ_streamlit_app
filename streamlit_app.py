@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import snowflake.connector
+import requests
 from urllib.error import URLError
 
 
@@ -28,13 +29,21 @@ else:
 
 #New Section to display druityvice api response
 st.header('Fruityvice Fruit Advice!')
-fruit_choice=st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user Entered',fruit_choice)
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+try:
+  fruit_choice=st.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+    st.write('Please Select a Fruit to get information.')
+  else:
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+    frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
+    # st.write('The user Entered',fruit_choice)
+    st.dataframe(frutiyvice_normalized)
+except URLError as e:
+  st.error()
+
 #st.text(fruityvice_response.json())
 #take the json version of the response and normalize it
-frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
+
 #output it the screen as a table
 st.dataframe(frutiyvice_normalized)
 
