@@ -7,7 +7,7 @@ st.text('🐔 Hard-Boiled Free-range Egg')
 st.text('🥑🍞 Avocoado Toast')
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-import pandas
+import pandas as pd
 my_fruit_list=pandas.read_csv('https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt')
 my_fruit_list=my_fruit_list.set_index('Fruit')
 
@@ -26,3 +26,7 @@ st.header('Fruityvice Fruit Advice!')
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 st.text(fruityvice_response.json())
+#take the json version of the response and normalize it
+frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
+#output it the screen as a table
+st.dataframe(frutiyvice_normalized)
