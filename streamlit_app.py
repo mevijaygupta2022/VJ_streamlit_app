@@ -20,3 +20,7 @@ if len(fruit_select)>0:
   st.dataframe(fruits_to_show)
 else:
   st.dataframe(my_fruit_list)
+
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response)
