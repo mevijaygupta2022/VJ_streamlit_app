@@ -1,7 +1,7 @@
 import streamlit as st
-
-
-
+import pandas as pd
+import snowflake.connector
+from urllib.error import URLError
 
 
 st.title('My Parents new Healthy Diner')
@@ -12,7 +12,7 @@ st.text('🐔 Hard-Boiled Free-range Egg')
 st.text('🥑🍞 Avocoado Toast')
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-import pandas as pd
+
 my_fruit_list=pd.read_csv('https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt')
 my_fruit_list=my_fruit_list.set_index('Fruit')
 
@@ -38,7 +38,7 @@ frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
 #output it the screen as a table
 st.dataframe(frutiyvice_normalized)
 
-import snowflake.connector
+
 my_cnx =snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur=my_cnx.cursor()
 st.stop()
