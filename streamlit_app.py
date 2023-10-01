@@ -21,6 +21,8 @@ if len(fruit_select)>0:
 else:
   st.dataframe(my_fruit_list)
 
+#New Section to display druityvice api response
+st.header('Fruityvice Fruit Advice!')
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response)
+st.text(fruityvice_response.json())
