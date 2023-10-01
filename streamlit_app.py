@@ -4,7 +4,12 @@ import snowflake.connector
 import requests
 from urllib.error import URLError
 
-
+#create a function
+def get_fruityvice_data(this_fruit_choice):
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+  frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
+  return frutiyvice_normalized
+  
 st.title('My Parents new Healthy Diner')
 st.header('Breakfast Favorites')
 st.text('🥣 Omega 3 & blueberry Oatmeal')
@@ -34,10 +39,10 @@ try:
   if not fruit_choice:
     st.write('Please Select a Fruit to get information.')
   else:
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
-    frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
+    
+    
     # st.write('The user Entered',fruit_choice)
-    st.dataframe(frutiyvice_normalized)
+    st.dataframe(get_fruityvice_data(fruit_choice))
 except URLError as e:
   st.error()
 
