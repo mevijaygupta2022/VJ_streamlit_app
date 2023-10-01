@@ -45,7 +45,7 @@ except URLError as e:
 #take the json version of the response and normalize it
 
 #output it the screen as a table
-st.dataframe(frutiyvice_normalized)
+# st.dataframe(frutiyvice_normalized)
 
 
 my_cnx =snowflake.connector.connect(**st.secrets["snowflake"])
