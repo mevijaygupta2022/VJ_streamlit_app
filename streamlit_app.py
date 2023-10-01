@@ -1,8 +1,7 @@
 import streamlit as st
-import snowflake.connector
 
-my_cnx =snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur=my_cnx.cursor()
+
+
 
 
 st.title('My Parents new Healthy Diner')
@@ -39,6 +38,9 @@ frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
 #output it the screen as a table
 st.dataframe(frutiyvice_normalized)
 
+import snowflake.connector
+my_cnx =snowflake.connector.connect(**st.secrets["snowflake"])
+my_cur=my_cnx.cursor()
 st.stop()
 my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST;")
 my_data_row=my_cur.fetchall()
