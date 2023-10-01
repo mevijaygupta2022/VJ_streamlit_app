@@ -3,10 +3,7 @@ import snowflake.connector
 
 my_cnx =snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur=my_cnx.cursor()
-my_cur.execute("select current_user(),current_account(),current_region()")
-my_data_row=my_cur.fetchone()
-st.text("Hello from snowflake")
-st.text(my_data_row)
+
 
 st.title('My Parents new Healthy Diner')
 st.header('Breakfast Favorites')
@@ -41,3 +38,8 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_cho
 frutiyvice_normalized =pd.json_normalize(fruityvice_response.json())
 #output it the screen as a table
 st.dataframe(frutiyvice_normalized)
+
+my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST;")
+my_data_row=my_cur.fetchone()
+st.text("The fruit load list contains:")
+st.text(my_data_row)
